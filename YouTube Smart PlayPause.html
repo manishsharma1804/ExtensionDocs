@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Smart Play/Pause Extension</title>
+    <style>
+        :root {
+            --primary: #FF0000;
+            --text: #2d3436;
+            --background: #ffffff;
+            --surface: #f8f9fa;
+            --surface-hover: #f1f3f5;
+            --border: #e9ecef;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text: #f8f9fa;
+                --background: #1a1f24;
+                --surface: #2d3436;
+                --surface-hover: #343a40;
+                --border: #495057;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: var(--surface);
+            transition: transform 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1rem;
+            background: var(--surface);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: var(--surface-hover);
+        }
+
+        .faq-answer {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1rem;
+            max-height: 500px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.6rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: opacity 0.2s ease;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: 12px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <svg class="logo" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+            <h1>YouTube Smart Play/Pause</h1>
+            <p>Smart video control for a better browsing experience</p>
+            <a href="https://chrome.google.com/webstore/detail/your-extension-id" class="button">Add to Chrome</a>
+        </header>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Smart Pause</h3>
+                <p>Automatically pauses YouTube videos when you switch tabs or windows</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Customizable</h3>
+                <p>Choose exactly how you want the extension to behave</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy First</h3>
+                <p>No data collection, completely private and secure</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Lightweight</h3>
+                <p>Zero impact on browser performance, works instantly with no delay</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>How It Works</h2>
+            <p>YouTube Auto Pause is designed to enhance your browsing experience by intelligently managing video playback:</p>
+            <ul>
+                <li>Automatically pauses videos when you switch tabs</li>
+                <li>Pauses when you switch to another window</li>
+                <li>Optionally resumes playback when you return</li>
+                <li>Simple toggle to enable/disable the extension</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Privacy Policy</h2>
+            <p>We take your privacy seriously. Here's what you need to know:</p>
+            <ul>
+                <li>No personal data collection</li>
+                <li>No tracking or analytics</li>
+                <li>No external server communication</li>
+                <li>All preferences stored locally</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Required Permissions</h2>
+            <ul>
+                <li><strong>tabs</strong>: To detect tab switching and identify YouTube tabs</li>
+                <li><strong>host_permissions for YouTube</strong>: To control video playback</li>
+                <li><strong>storage</strong>: To save your preferences locally</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Why doesn't the extension work on embedded YouTube videos?
+                    <span class="toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    The extension is designed to work specifically with youtube.com domain. Embedded videos on other websites require different permissions and handling.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I temporarily disable the extension?
+                    <span class="toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Click the extension icon in your browser toolbar and use the main toggle button to enable/disable the extension. Your preferences will be saved.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Does this work with other video platforms?
+                    <span class="toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Currently, the extension is designed specifically for YouTube. Support for other platforms may be added in future updates.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Will this slow down my browser?
+                    <span class="toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    No, the extension is designed to be lightweight and efficient. It only runs when you're on YouTube and uses minimal resources.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="contact-links">
+                <a href="https://manishsharma18.in" target="_blank">Website</a>
+                <a href="https://instagram.com/me.manish18" target="_blank">Instagram</a>
+                <a href="mailto:support@example.com">Support</a>
+            </div>
+            <p>Created by <a href="https://manishsharma18.in" target="_blank">Manish Sharma</a></p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                    faqItem.querySelector('.toggle').textContent = '+';
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                    question.querySelector('.toggle').textContent = '−';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
